@@ -66,7 +66,6 @@ reg_term = (lambda / (2 * m)) * (sum(sum(nt1.^2)) + sum(sum(nt2.^2)));
 
 J = J + reg_term;
 
-%
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
 %         the cost function with respect to Theta1 and Theta2 in Theta1_grad and
@@ -82,6 +81,21 @@ J = J + reg_term;
 %               over the training examples if you are implementing it for the 
 %               first time.
 %
+
+
+d3 = a3 - y_matrix;
+z2 = z2;
+
+d2 = d3 * nt2 .* sigmoidGradient(z2);
+
+delta1 = d2' * a1;
+delta2 = d3' * a2;
+
+Theta1_grad = (1/m) * delta1;
+Theta2_grad = (1/m) * delta2;
+
+
+
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
@@ -92,10 +106,16 @@ J = J + reg_term;
 
 
 
+% modify theta1 and theta2
 
+Theta1(:,1) = 0;
+Theta2(:,1) = 0;
 
+Theta1 = (lambda/m) * Theta1;
+Theta2 = (lambda/m) * Theta2;
 
-
+Theta1_grad += Theta1;
+Theta2_grad += Theta2;
 
 
 
