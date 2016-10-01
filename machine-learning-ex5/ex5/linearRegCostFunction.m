@@ -28,13 +28,13 @@ h = X * theta;
 hminusy = h - y;
 hminusysq = hminusy.^2;
 J = (1/(2*m)) * sum(hminusysq);
-
+grad = (1/m) * (X' * (hminusy));
 
 %regularize
 theta(1) = 0;
-J += (lambda/(2*m)) * sum(theta.^2);
 
-grad = ((1/m) * sum(X' * (h-y))) + ((lambda/m) * theta);
+J += (lambda/(2*m)) * sum(theta.^2);
+grad += ((lambda/m) * theta);
 
 
 
