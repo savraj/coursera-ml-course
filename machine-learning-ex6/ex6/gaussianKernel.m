@@ -16,6 +16,9 @@ sim = 0;
 %
 %
 
+t = (x1-x2).^2;
+t2 = sum(t)/(2*sigma^2);
+sim = exp(-t2);
 
 
 
