@@ -21,11 +21,31 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+point_count = size(X,1);
+centroid_count = K;
 
+for i = 1:point_count
+  point = X(i,:);
 
+  % how far is this point from each centroid, and which is closest.
 
+  % assume the first centroid is the closest
+  nearest_centroid_id = 1;
+  nearest_centroid_distance = norm(centroids(1,:) - point, 2);
 
+  % run through all centroids and see if they're closer
+  for t = 1:centroid_count
+    centroid = centroids(t,:);
+    centroid_id = t;
+    this_centroid_distance = norm(centroid - point, 2);
+    if this_centroid_distance < nearest_centroid_distance
+        nearest_centroid_id = t;
+        nearest_centroid_distance = this_centroid_distance;
+    endif
+  endfor
 
+  idx(i,1) = nearest_centroid_id;
+endfor
 
 % =============================================================
 

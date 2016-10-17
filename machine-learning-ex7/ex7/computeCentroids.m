@@ -26,11 +26,20 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
+% m = 300 points, n = 2 dimensions
+% K = 3 centroids
 
+% centroids
+% should be row 1:  x, y (average of everything assigned to row1)
 
+for i = 1:K
 
+    % get me all the points assigned to this centroid
+    logical_index = (idx(:,1)==i);
+    subset_for_this_centroid = X(logical_index,:);
+    centroids(i,:) = mean(subset_for_this_centroid);
 
-
+endfor
 
 
 % =============================================================
